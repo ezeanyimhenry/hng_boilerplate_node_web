@@ -6,12 +6,12 @@ require ('dotenv').config();
 
 const app = express();
 
-// Serve Swagger documentation
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-
 // Your API routes go here
 
 app.use('/api', apiRoutes);
+
+// Serve Swagger documentation
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.listen(process.env.PORT, () => {
 console.log(`Server is running on port ${process.env.PORT}`);

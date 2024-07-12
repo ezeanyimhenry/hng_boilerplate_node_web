@@ -11,7 +11,7 @@ description: 'My API Description',
 
 const options = {
 swaggerDefinition,
-apis: ['./src/*.js'], // Path to the API routes in your Node.js application
+apis: ['./src/routes/api.js'], 
 };
 
 const swaggerSpec = swaggerJSDoc(options);
