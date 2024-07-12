@@ -1,12 +1,9 @@
 const express = require('express');
+const app = express();
+require ('dotenv').config();
 const swaggerUI = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 const apiRoutes = require('./routes/api');
-require ('dotenv').config();
-
-const app = express();
-
-// Your API routes go here
 
 app.use('/api', apiRoutes);
 

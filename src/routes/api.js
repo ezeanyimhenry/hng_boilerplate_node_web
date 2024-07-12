@@ -1,18 +1,27 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 /**
  * @swagger
- * /api/test:
+ * /api/jopak:
  *   get:
- *     summary: Get a resource
- *     description: Get a specific resource.
+ *     summary: Welcome route
+ *     description: API Documentation for Team JOPAK.
  *     responses:
  *       200:
  *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Welcome to Team JOPAK API docs
  */
-router.get('/test', (req, res) => {
-  res.json({ message: "Resource retrieved successfully" });
+
+router.get("/jopak", (req, res) => {
+  res.json({ message: "Welcome to Team JOPAK API docs" });
 });
 
 module.exports = router;
