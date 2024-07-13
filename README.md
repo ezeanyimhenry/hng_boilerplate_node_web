@@ -4,7 +4,7 @@ This document shows tables, relationships, and API endpoints for the HNG Boilerp
 
 ## Documentation Links
 
-- **API Documentation on Swagger Editor**: [link to API design](#)
+- **API Documentation on Swagger Editor**: [link to API design](https://app.swaggerhub.com/apis/EZEANYIMHENRY/hng-boilerplate_by_team_jopak/1.0.0)
 - **Database Design**: [link to DB design](#)
 
 ---
