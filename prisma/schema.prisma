@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,150 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String             @id @default(uuid())
+  username        String             @unique
+  email           String             @unique
+  password        String
+  profilePicture  String?
+  role            Role               @default(USER)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  organisations   UserOrganisation[]
+  sentInvites     Invite[]           @relation("SentInvites")
+  receivedInvites Invite[]           @relation("ReceivedInvites")
+  notifications   Notification[]
+  blogs           Blog[]
+  sentMessages    Message[]          @relation("SentMessages")
+  receivedMessages Message[]         @relation("ReceivedMessages")
+  payments        Payment[]
+  randomData      RandomData[]
+  contacts        Contact[]
+}
+
+model Organisation {
+  id        String             @id @default(uuid())
+  name      String
+  users     UserOrganisation[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+model UserOrganisation {
+  userId         String
+  organisationId String
+  role           OrganisationRole @default(MEMBER)
+  user           User             @relation(fields: [userId], references: [id])
+  organisation   Organisation     @relation(fields: [organisationId], references: [id])
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now())
+
+  @@id([userId, organisationId])
+}
+
+model Invite {
+  id         String       @id @default(uuid())
+  senderId   String
+  receiverId String?
+  status     InviteStatus @default(PENDING)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  sender     User         @relation("SentInvites", fields: [senderId], references: [id])
+  receiver   User?        @relation("ReceivedInvites", fields: [receiverId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  content   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Blog {
+  id        String   @id @default(uuid())
+  authorId  String
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  senderId   String
+  receiverId String
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
+
+model Payment {
+  id        String        @id @default(uuid())
+  userId    String
+  amount    Float
+  method    PaymentMethod
+  status    PaymentStatus
+  createdAt DateTime      @default(now())
+  user      User          @relation(fields: [userId], references: [id])
+}
+
+model RandomData {
+  id        String   @id @default(uuid())
+  userId    String
+  data      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Contact {
+  id        String      @id @default(uuid())
+  userId    String
+  type      ContactType
+  content   String
+  createdAt DateTime    @default(now())
+  user      User        @relation(fields: [userId], references: [id])
+}
+
+// Enums
+
+enum Role {
+  USER
+  ADMIN
+  SUPERADMIN
+}
+
+enum OrganisationRole {
+  OWNER
+  MEMBER
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+enum PaymentMethod {
+  STRIPE
+  FLUTTERWAVE
+  LEMONSQUEEZY
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum ContactType {
+  EMAIL
+  PHONE
 }
