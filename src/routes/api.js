@@ -24,8 +24,6 @@ const router = express.Router();
  *                     type: string
  *                   phone:
  *                     type: string
- *                   password:
- *                     type: string
  *                  
  */
 router.post('/create-users', (req, res) => {
@@ -55,8 +53,6 @@ router.post('/create-users', (req, res) => {
  *                   name:
  *                     type: string
  *                   email:
- *                     type: string
- *                   phone:
  *                     type: string
  *                   password:
  *                     type: string
@@ -147,38 +143,6 @@ router.post('/create-organizations', (req, res) => {
   res.json([]);
 });
 
-/**
- * @swagger
- * /api/user-organizations:
- *   post:
- *     summary: Add a User to an organisation
- *     description: Add a User to an organisation.
- *     responses:
- *       200:
- *         description: Add a User to an organisation
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: string
- *                     format: uuid
- *                   userId:
- *                     type: string
- *                     format: uuid
- *                   organisationId:
- *                     type: string
- *                     format: uuid
- *                   role:
- *                     type: string
- */
-router.post('/user-organizations', (req, res) => {
-    // Implement logic to fetch all organizations
-    res.json([]);
-  });
 
 /**
  * @swagger
