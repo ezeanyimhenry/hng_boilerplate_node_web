@@ -1,5 +1,5 @@
--   Henry Ezeanyim (@oracus) - Backend Developer
+- Henry Ezeanyim (@oracus) - Backend Developer
 - Daniel Wari (@prudentbird) - Backend Developer
-- Okoh Kingsley (@Okoh Kingsley) - Backend Developer 
-- Judah Onunkwor (@judah onunkwor) - Backend Developer 
--   Savlms (@savlms) - Backend Developer
+- Okoh Kingsley (@Okoh Kingsley) - Backend Developer
+- Judah Onunkwor (@judah onunkwor) - Backend Developer
+- Savlms (@savlms) - Backend Developer
