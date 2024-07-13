@@ -259,7 +259,7 @@ This document shows tables, relationships, and API endpoints for the HNG Boilerp
 
 ## Database Schema
 
-![Screenshot 1](screenshots/screenshot1.png)
+![Screenshot 1](dbdiagram.png)
 
 ### Tables Overview
 
